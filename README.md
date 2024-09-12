@@ -109,14 +109,6 @@ mvn spring-boot:run
 http://localhost:8080
 ```
 
-### Modelos de ER
-
-O diagrama de Entidade-Relacionamento (ER) reflete as seguintes entidades e seus relacionamentos:
-
-- **Produto** possui um **Estoque**.
-- **Usuario** realiza **Venda(s)**.
-- **Venda** contém vários **ItensVenda**, que são relacionados a **Produto(s)**.
-
 ### Usando a API com Insomnia
 
 Aqui estão alguns exemplos de como você pode testar a API usando o **Insomnia**.
