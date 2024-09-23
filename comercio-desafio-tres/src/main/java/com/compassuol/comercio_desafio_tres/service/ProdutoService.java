@@ -10,21 +10,25 @@ import java.util.stream.Collectors;
 public class ProdutoService {
    @Autowired
    private ProdutoRepository produtoRepository;
+   
    public List<ProdutoDTO> getAllProdutos() {
        return produtoRepository.findAll().stream()
            .filter(Produto::isAtivo) 
            .map(this::convertToDTO)
            .collect(Collectors.toList());
    }
+   
    public ProdutoDTO getProdutoById(Long id) {
        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
        return convertToDTO(produto);
    }
+   
    public ProdutoDTO createProduto(ProdutoDTO produtoDto) {
        Produto produto = convertToEntity(produtoDto);
        Produto novoProduto = produtoRepository.save(produto);
        return convertToDTO(novoProduto);
    }
+   
    public ProdutoDTO updateProduto(Long id, ProdutoDTO produtoDto) {
        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
        produto.setNome(produtoDto.getNome());
@@ -33,6 +37,7 @@ public class ProdutoService {
        produto = produtoRepository.save(produto);
        return convertToDTO(produto);
    }
+   
    public void deleteProduto(Long id) {
        Produto produto = produtoRepository.findById(id)
            .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
@@ -47,9 +52,11 @@ public class ProdutoService {
            produtoRepository.deleteById(id);
        }
    }
+   
    private ProdutoDTO convertToDTO(Produto produto) {
        return new ProdutoDTO(produto.getId(), produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.isAtivo());
    }
+   
    private Produto convertToEntity(ProdutoDTO produtoDto) {
        return new Produto(produtoDto.getNome(), produtoDto.getDescricao(), produtoDto.getPreco(), produtoDto.isAtivo());
    }

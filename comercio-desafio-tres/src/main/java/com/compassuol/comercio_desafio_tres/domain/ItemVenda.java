@@ -1,6 +1,7 @@
 package com.compassuol.comercio_desafio_tres.domain;
 import jakarta.persistence.*;
-@Table(name="ItemVenda")
+
+@Table(name="item_venda")
 @Entity
 public class ItemVenda {
    @Id

@@ -15,10 +15,12 @@ public class UsuarioService {
            .map(this::convertToDTO)
            .collect(Collectors.toList());
    }
+   
    public UsuarioDTO getUsuarioById(Long id) {
        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
        return convertToDTO(usuario);
    }
+   
    public UsuarioDTO createUsuario(UsuarioDTO usuarioDto) {
        Usuario usuario = convertToEntity(usuarioDto);
        Usuario novoUsuario = usuarioRepository.save(usuario);

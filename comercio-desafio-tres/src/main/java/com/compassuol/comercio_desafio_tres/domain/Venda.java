@@ -1,5 +1,7 @@
 package com.compassuol.comercio_desafio_tres.domain;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 @Table(name="Venda")
