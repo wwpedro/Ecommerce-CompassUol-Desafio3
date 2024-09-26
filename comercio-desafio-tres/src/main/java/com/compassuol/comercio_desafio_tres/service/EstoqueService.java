@@ -24,12 +24,18 @@ public class EstoqueService {
    }
    
    public EstoqueDTO createEstoque(EstoqueDTO estoqueDto) {
+	if (estoqueDto.getQuantidadeAtual() < 0) {
+	        throw new IllegalArgumentException("A quantidade do estoque não pode ser negativa");
+	}   
        Estoque estoque = convertToEntity(estoqueDto);
        Estoque novoEstoque = estoqueRepository.save(estoque);
        return convertToDTO(novoEstoque);
    }
    
    public EstoqueDTO updateEstoque(Long id, EstoqueDTO estoqueDto) {
+	if (estoqueDto.getQuantidadeAtual() < 0) {
+	        throw new IllegalArgumentException("A quantidade do estoque não pode ser negativa");
+	}
        Estoque estoque = estoqueRepository.findById(id).orElseThrow(() -> new RuntimeException("Estoque não encontrado"));
        estoque.setQuantidadeAtual(estoqueDto.getQuantidadeAtual());
        estoque = estoqueRepository.save(estoque);
